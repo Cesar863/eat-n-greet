@@ -1,10 +1,10 @@
 const faker = require("faker");
 
 const db = require("../config/connnection.js");
-const { Review, User } = require("../models");
+const { Meetup, User } = require("../models");
 
 db.once("open", async () => {
-  await Review.deleteMany({});
+  await Meetup.deleteMany({});
   await User.deleteMany({});
 
   // create user data
@@ -20,22 +20,22 @@ db.once("open", async () => {
 
   const createdUsers = await User.collection.insertMany(userData);
 
-  // create reviews
-  let createdReviews = [];
+  // create metups
+  let createdMeetups = [];
   for (let i = 0; i < 100; i += 1) {
-    const reviewText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+    const meetupText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const { username, _id: userId } = createdUsers.ops[randomUserIndex];
 
-    const createdReview = await Review.create({ reviewText, username });
+    const createdMeetup = await Meetup.create({ meetupText, username });
 
     const updatedUser = await User.updateOne(
       { _id: userId },
-      { $push: { reviews: createdReview._id } }
+      { $push: { meetups: createdMeetup._id } }
     );
 
-    createdReviews.push(createdReview);
+    createdMeetups.push(createdMeetup);
   }
 
   console.log("all done!");
