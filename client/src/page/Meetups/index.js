@@ -1,15 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
+import Auth from "../utils/auth";
 import "./style.css";
 
 const Meetups = () => {
     //Javascript goes here
-    const [meetupsText, setText] = useState('');
-    const [characterCount, setCharacterCount] = useState(0);
 
-    return
-    <div>
-        Meetups
+
+return (
+    <div className="flex-row justify-space-between">
+
+    <div>Meetups</div>
+
+
     </div>
+)
 }
+ 
 
 export default Meetups;
