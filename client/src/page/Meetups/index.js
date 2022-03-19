@@ -3,6 +3,9 @@ import "./style.css";
 
 const Meetups = () => {
     //Javascript goes here
+    const [meetupsText, setText] = useState('');
+    const [characterCount, setCharacterCount] = useState(0);
+
     return
     <div>
         Meetups
