@@ -3,7 +3,7 @@ const dateFormat = require("../utils/dateFormat");
 
 const meetupSchema = new Schema(
   {
-    reviewText: {
+    meetupText: {
       type: String,
       required: "You need to enter a meetup!",
       minlength: 1,
