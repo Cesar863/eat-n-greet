@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 
 function Navbar() {
+    //Functions go here
     return (
         <header>
             <nav>
