@@ -3,13 +3,14 @@ import React from 'react';
 const Main = () => {
 
 
-    return ( 
-        <div> 
+    return (
+        <section>
+            <header>
+                Eat N Greet
+            </header>
+        </section>
 
-            
-        </div>
-
-     );
+    );
 }
 
 

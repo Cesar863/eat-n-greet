@@ -8,16 +8,16 @@ function Navbar() {
             <nav>
                 <ul className="flex-row">
                     <li>
-                        <a href="#login">
-                            Login
-                        </a>
+                        Meetups
                     </li>
                     <li>
-                        <a href="#signup">
-                            Signup
+                        Dashboard
+                    </li>
+                    <li>
+                        <a href="#logout">
+                            Logout
                         </a>
                     </li>
-
                 </ul>
             </nav>
         </header>
