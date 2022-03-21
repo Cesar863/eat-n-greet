@@ -38,12 +38,10 @@ const SavedRestaurants = () => {
         }
     };
 
-    // if data isn't here yet, say so
     if (loading) {
         return <h2>LOADING...</h2>;
     }
 
-    // sync localStorage with what was returned from the userData query
     const savedRestaurantIds = userData.savedRestaurants.map((restaurant) => restaurant.restaurantId);
     saveRestaurantIds(savedRestaurantIds);
 
