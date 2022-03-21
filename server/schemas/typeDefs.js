@@ -2,38 +2,44 @@ const { gql } = require("apollo-server-express");
 
 
 const typeDefs = gql`
-  type Meetup {
-    _id: ID
-    thoughtText: String
-    createdAt: String
-    username: String
+  type Restaurant {
+    restaurantID: String!
+    language: String!
+    limit: String!
+    currency: String!
+    locationID: String!
   }
 
   type User {
     _id: ID
     username: String
     email: String
-    meetups: [Meetup]
-    
-  }
-
-  type Query {
-    me: User
-    users: [User]
-    user(username: String!): User
-    meetups(username: String): [Meetup]
-    meetup(_id: ID!): Meetup
-  }
-
-  type Mutation {
-    login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
-    addMeetup(meetupText: String!): Meetup
+    savedRestaurants: [Restaurant]
   }
 
   type Auth {
     token: ID!
     user: User
+  }
+
+  input SavedRestaurantInput {
+    restaurantId: String
+    language: String
+    limit: String
+    currency: String
+    locationID: String
+    
+  }
+
+  type Query {
+    me: User
+  }
+
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    saveRestaurant(input: SavedRestaurantInput): User
+    removeRestaurant(restaurantID: String!): User
   }
 `;
 

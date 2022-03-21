@@ -1,7 +1,8 @@
-const { Schema, model } = require("mongoose");
-const bcrypt = require("bcrypt");
+const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
 
+const restaurantSchema = require('./Restaurant');
 
 const userSchema = new Schema(
   {
@@ -9,26 +10,20 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      trim: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/, "Must match an email address!"],
+      match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
     password: {
       type: String,
       required: true,
-      minlength: 5,
     },
-    meetups: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Meetup",
-      },
-    ],
+    savedRestaurants: [restaurantSchema],
   },
+
   {
     toJSON: {
       virtuals: true,
@@ -36,8 +31,8 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.pre("save", async function (next) {
-  if (this.isNew || this.isModified("password")) {
+userSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -45,10 +40,15 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-const User = model("User", userSchema);
+userSchema.virtual('restaurantCount').get(function () {
+  return this.savedRestaurants.length;
+});
+
+const User = model('User', userSchema);
 
 module.exports = User;

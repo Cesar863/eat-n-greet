@@ -33,8 +33,6 @@ export const SAVE_RESTAURANT = gql`
       restaurantCount
       savedRestaurants {
         restaurantId
-        image
-        link
         language
         limit
         location_id
@@ -53,8 +51,6 @@ export const REMOVE_RESTAURANT = gql`
       restaurantCount
       savedRestaurants {
         restaurantId
-        image
-        link
         language
         limit
         location_id
