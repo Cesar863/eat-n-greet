@@ -8,13 +8,10 @@ export const GET_ME = gql`
       restaurantCount
       savedRestaurants {
         restaurantId
-        image
-        link
         language
         limit
         location_id
         currency
-      }
       }
     }
   }
