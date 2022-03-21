@@ -24,3 +24,42 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const SAVE_RESTAURANT = gql`
+  mutation saveRestaurant($input: SavedRestaurantInput) {
+    saveRestaurant(input: $input) {
+      _id
+      username
+      restaurantCount
+      savedRestaurants {
+        restaurantId
+        image
+        link
+        language
+        limit
+        location_id
+        currency
+      }
+    }
+  }
+`;
+
+
+export const REMOVE_RESTAURANT = gql`
+  mutation removeRestaurant($restaurantId: String!) {
+    removeRestaurant(restaurantId: $restaurantId) {
+      _id
+      username
+      restaurantCount
+      savedRestaurants {
+        restaurantId
+        image
+        link
+        language
+        limit
+        location_id
+        currency
+      }
+    }
+  }
+`;
