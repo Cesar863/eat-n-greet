@@ -23,7 +23,7 @@ const SearchRestaurants = () => {
 
     useEffect(() => {
         return () => {
-            saveRestaurnatIds(savedRestaurantIds);
+            saveRestaurantIds(savedRestaurantIds);
         };
     });
 
@@ -46,7 +46,7 @@ const SearchRestaurants = () => {
             const { items } = await response.json();
 
             const restaurantData = items.map((restaurant) => ({
-                restaurantId: restuarnt.id,
+                restaurantId: restaurant.id,
                 // title: book.volumeInfo.title,
                 // description: book.volumeInfo.description,
                 // image: book.volumeInfo.imageLinks?.thumbnail || "",
