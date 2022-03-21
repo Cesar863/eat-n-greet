@@ -1,4 +1,4 @@
-export const searchRestaurants = (query) => {
+export const searchRapidRestaurants = (query) => {
     return fetch(`https://rapidapi.com/ptwebsolution/api/worldwide-restaurantsq=${query}`);
 };
 

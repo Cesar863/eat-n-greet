@@ -9,30 +9,30 @@ import {
 import { useQuery, useMutation } from "@apollo/react-hooks";
 
 import Auth from "../utils/auth";
-import { removeBookId, saveBookIds } from "../utils/localStorage";
+import { removeRestaurantId, saveRestaurantIds } from "../utils/localStorage";
 import { GET_ME } from "../utils/queries";
-import { REMOVE_BOOK } from "../utils/mutations";
+import { REMOVE_RESTAURANT } from "../utils/mutations";
 
-const SavedBooks = () => {
+const SavedRestaurants = () => {
     const { loading, data } = useQuery(GET_ME);
     const userData = data?.me || [];
 
-    const [removeBook, { error }] = useMutation(REMOVE_BOOK);
+    const [removeRestaurant, { error }] = useMutation(REMOVE_RESTAURANT);
 
-    const handleDeleteBook = async (bookId) => {
+    const handleDeleteRestaurant = async (restaurantId) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
         if (!token) {
             return false;
         }
         try {
-            const response = await removeBook({
-                variables: { bookId: bookId },
+            const response = await removeRestaurant({
+                variables: { restaurantId: restaurantId },
             });
 
             if (!response) {
                 throw new Error("something went wrong!");
             }
-            removeBookId(bookId);
+            removeRestaurantId(restaurantId);
         } catch (err) {
             console.error(error);
         }
@@ -44,43 +44,43 @@ const SavedBooks = () => {
     }
 
     // sync localStorage with what was returned from the userData query
-    const savedBookIds = userData.savedBooks.map((book) => book.bookId);
-    saveBookIds(savedBookIds);
+    const savedRestaurantIds = userData.savedRestaurants.map((restaurant) => restaurant.restaurantId);
+    saveRestaurantIds(savedRestaurantIds);
 
     return (
         <>
             <Jumbotron fluid className="text-light bg-dark">
                 <Container>
-                    <h1>Viewing saved books!</h1>
+                    <h1>Viewing saved restaurants!</h1>
                 </Container>
             </Jumbotron>
             <Container>
                 <h2>
-                    {userData.savedBooks.length
-                        ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? "book" : "books"
+                    {userData.savedRestaurants.length
+                        ? `Viewing ${userData.savedRestaurants.length} saved ${userData.savedRestaurants.length === 1 ? "restaurant" : "restaurants"
                         }:`
-                        : "You have no saved books!"}
+                        : "You have no saved restaurants!"}
                 </h2>
                 <CardColumns>
-                    {userData.savedBooks.map((book) => {
+                    {userData.savedRestaurants.map((restaurant) => {
                         return (
-                            <Card key={book.bookId} border="dark">
-                                {book.image ? (
+                            <Card key={restaurant.restaurantId} border="dark">
+                                {restaurant.image ? (
                                     <Card.Img
-                                        src={book.image}
-                                        alt={`The cover for ${book.title}`}
+                                        src={restaurant.image}
+                                        alt={`The cover for ${restaurant.title}`}
                                         variant="top"
                                     />
                                 ) : null}
                                 <Card.Body>
-                                    <Card.Title>{book.title}</Card.Title>
-                                    <p className="small">Authors: {book.authors}</p>
-                                    <Card.Text>{book.description}</Card.Text>
+                                    <Card.Title>{restaurant.title}</Card.Title>
+                                    {/* <p className="small">Authors: {book.authors}</p> */}
+                                    {/* <Card.Text>{book.description}</Card.Text> */}
                                     <Button
                                         className="btn-block btn-danger"
-                                        onClick={() => handleDeleteBook(book.bookId)}
+                                        onClick={() => handleDeleteRestaurant(restaurant.restaurantId)}
                                     >
-                                        Delete this Book!
+                                        Delete this restaurant!
                                     </Button>
                                 </Card.Body>
                             </Card>
@@ -92,4 +92,4 @@ const SavedBooks = () => {
     );
 };
 
-export default SavedBooks;
+export default SavedRestaurants;
