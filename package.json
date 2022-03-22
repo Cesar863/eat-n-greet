@@ -19,7 +19,8 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "restaurants": "^0.0.7"
   },
   "devDependencies": {
     "concurrently": "^5.2.0"

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import Meetups from '../page/meetups';
 
 import Auth from '../utils/auth';
 
@@ -22,6 +23,9 @@ const AppNavbar = () => {
                         <Nav className='ml-auto'>
                             <Nav.Link as={Link} to='/'>
                                 Search for Restaurants
+                            </Nav.Link>
+                            <Nav.Link as={Link} to={Meetups}>
+                                Meetups
                             </Nav.Link>
                             {/* if user is logged in show saved books and logout */}
                             {Auth.loggedIn() ? (

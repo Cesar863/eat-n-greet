@@ -5,6 +5,7 @@ import ApolloClient from "apollo-boost";
 
 import SearchRestaurants from "./page/SearchRestaurants";
 import SavedRestaurants from "./page/SavedRestaurants";
+import Meetups from './page/meetups'
 import Navbar from './components/Navbar';
 
 // import Meetups from './page/Meetups';
@@ -32,6 +33,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={SearchRestaurants} />
             <Route exact path="/saved" component={SavedRestaurants} />
+            <Route exact path="/meetups" component={Meetups} />
             <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
           </Switch>
         </>
