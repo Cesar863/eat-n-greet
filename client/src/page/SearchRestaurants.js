@@ -68,7 +68,6 @@ const SearchRestaurants = () => {
     const handleSaveRestaurant = async (restaurantId) => {
         const restaurantToSave = searchedRestaurants.find((restaurant) => restaurant.restaurantId === restaurantId);
 
-        // get token
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
         if (!token) {
