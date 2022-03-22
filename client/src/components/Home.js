@@ -1,0 +1,17 @@
+import MeetupsList from './MeetupsList';
+import useFetch from './useFetch';
+import React from 'react'
+
+
+const Home = () => {
+    const {data: blogs, isPending, error} = useFetch ('http://localhost:8000/blogs');
+    return ( 
+        <div className="home">
+            {error && <div>{error}</div>}
+            {isPending && <div>Loading...</div>}
+            <MeetupsList blogs={blogs} title="All Blogs"/>
+        </div>
+    );
+}
+
+export default Home;

@@ -15,6 +15,45 @@ import { saveRestaurantIds, getSavedRestaurantIds } from "../utils/localStorage"
 import { SAVE_RESTAURANT } from "../utils/mutations";
 import { useMutation } from "@apollo/react-hooks";
 
+var locationNum = 0;
+var locationName = "";
+var userZipCode = [];
+
+//else pop up modal that states the zip cannot be validated to enter a valid zip code
+// save user zip to local storage
+var addZip = (event) => {
+	event.preventDefault();
+	var addUserZip = document.getElementById("zip").value;
+
+	// if statement
+	if (isNaN(addUserZip) || addUserZip < 10000 || addUserZip > 99999) {
+		// enter error modal
+		var showModal = function() {
+			var modal = document.getElementById("modal");
+			modal.classList.add("is-active");
+		}
+		showModal();
+		
+		var confirmError = function() {
+			var error = document.getElementById("modal")
+			error.classList.remove("is-active");
+			location.reload();
+		}
+		document.getElementById("errorBtn"), addEventListener("submit", confirmError);
+		
+	} else {
+	userZipCode.push(addUserZip);
+	console.log(userZipCode);
+
+	//save to local storage
+	localStorage.setItem("zipCode", JSON.stringify(addUserZip))
+
+	//load other webpage
+	loadResults();
+}
+}
+
+
 const SearchRestaurants = () => {
     const [searchedRestaurants, setSearchedRestaurants] = useState([]);
     const [searchInput, setSearchInput] = useState("");
@@ -47,6 +86,7 @@ const SearchRestaurants = () => {
 
             const restaurantData = items.map((restaurant) => ({
                 restaurantId: restaurant.id,
+
                 // title: book.volumeInfo.title,
                 // description: book.volumeInfo.description,
                 // image: book.volumeInfo.imageLinks?.thumbnail || "",
