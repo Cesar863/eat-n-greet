@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-// import Auth from "../utils/auth";
-// import "./style.css";
+import Auth from "../utils/auth";
+import Posts from "../components/Posts";
+
+
 
 const meetups = () => {
-    //Javascript goes here
-
-
     return (
         <div className="flex-row justify-space-between">
-            <div>Meetups</div>
+            <h1>Meetups</h1>
+            <Posts />
         </div>
-    )
-}
+    );
+};
 
 export default meetups;
+
+
+
+
