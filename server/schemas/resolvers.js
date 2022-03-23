@@ -6,12 +6,35 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
+        const userData = await User.findOne({})
+          .select("-__v -password")
+          .populate("meetups")
         return userData;
       }
       throw new AuthenticationError("Not logged in");
+    },
+    // get all meetups
+    meetups: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Meetup.find(params).sort({ createdAt: -1 });
+    },
+    // get one meetup by id
+    meetup: async (parent, { _id }) => {
+      return Meetup.findOne({ _id });
+    },
+
+    // get all users
+    users: async () => {
+      return User.find()
+        .select("-__v -password")
+        .populate("meetups");
+    },
+
+    // get a user by username
+    user: async (parent, { username }) => {
+      return User.findOne({ username })
+        .select("-__v -password")
+        .populate("meetups");
     },
   },
   Mutation: {
