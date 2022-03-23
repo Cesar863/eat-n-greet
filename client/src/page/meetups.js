@@ -18,3 +18,5 @@ export default meetups;
 
 
 
+//Can I have generated posts on the Posts.js page as well as add, edit, and delete posts?
+//Need bootstrap on this page
