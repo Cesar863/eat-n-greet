@@ -40,7 +40,17 @@ const typeDefs = gql`
     saveRestaurant(input: SavedRestaurantInput): User
     removeRestaurant(restaurantID: String!): User
   }
+
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    addMeetup(meetupText: String!): User
+    editMeetup(meetupText: String!): User
+    removeMeetup(meetupID: String!): User
+    
+  }
 `;
+
 
 
 module.exports = typeDefs;
