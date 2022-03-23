@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 
-const restaurantSchema = require('./Restaurant');
+const meetupSchema = require('./Meetup');
 
 const userSchema = new Schema(
   {
@@ -45,8 +45,8 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('restaurantCount').get(function () {
-  return this.savedRestaurants.length;
+userSchema.virtual('meetupCount').get(function () {
+  return this.savedMeetups.length;
 });
 
 const User = model('User', userSchema);

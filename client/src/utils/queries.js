@@ -27,15 +27,16 @@ export const ADD_USER = gql`
 
 
 export const ADD_MEETUPS = gql`
-
-
-
-
+  mutation addMeetups($input: addMeetupInput) {
+    addMeetups(input: $input) {
+      _id
+      username
+      title
+      body
+      image
+    }
+  }
 `;
-
-
-
-
 
 
 

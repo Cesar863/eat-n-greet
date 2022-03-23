@@ -1,5 +1,6 @@
-const { AuthenticationError } = require("apollo-server-errors");
-const { User } = require("../models");
+const { User, Meetup } = require("../models");
+const { AuthenticationError } = require("apollo-server-express");
+
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -9,6 +10,8 @@ const resolvers = {
         const userData = await User.findOne({})
           .select("-__v -password")
           .populate("meetups")
+
+
         return userData;
       }
       throw new AuthenticationError("Not logged in");
@@ -37,51 +40,48 @@ const resolvers = {
         .populate("meetups");
     },
   },
+
   Mutation: {
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
-
-      if (!user) {
-        throw new AuthenticationError("Invalid credentials");
-      }
-
-      const correctPassword = await user.isCorrectPassword(password);
-      if (!correctPassword) {
-        throw new AuthenticationError("Invalid credentials");
-      }
-      const token = signToken(user);
-
-      return { token, user };
-    },
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
 
       return { token, user };
     },
-    saveRestaurant: async (parent, { input }, context) => {
-      if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { savedRestaurants: input } },
-          { new: true, runValidators: true }
-        );
-        return updatedUser;
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials");
       }
-      throw new AuthenticationError("You need to be logged in!");
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+
+      const token = signToken(user);
+      return { token, user };
     },
-    removeRestaurant: async (parent, { restaurantId }, context) => {
+
+    addMeetup: async (parent, args, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
+        const meetup = await Meetup.create({
+          ...args,
+          username: context.user.username,
+        });
+
+        await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedRestaurants: { restaurantId: restaurantId } } },
+          { $push: { meetups: meetup._id } },
           { new: true }
         );
-        return updatedUser;
+
+        return meetup;
       }
+
       throw new AuthenticationError("You need to be logged in!");
     },
   },
 };
-
-module.exports = resolvers;
