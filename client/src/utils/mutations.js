@@ -42,6 +42,15 @@ export const SAVE_RESTAURANT = gql`
   }
 `;
 
+export const ADD_COMMENT = gql`
+  mutation addComment($input: AddCommentInput) {
+    addComment(input: $input) {
+      _id
+      username
+      
+    }
+  }`
+
 
 export const REMOVE_RESTAURANT = gql`
   mutation removeRestaurant($restaurantId: String!) {

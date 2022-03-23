@@ -1,44 +1,35 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ApolloProvider } from "@apollo/react-hooks";
-import ApolloClient from "apollo-boost";
-
-import SearchRestaurants from "./page/SearchRestaurants";
-import SavedRestaurants from "./page/SavedRestaurants";
-import Meetups from './page/meetups'
 import Navbar from './components/Navbar';
-
-// import Meetups from './page/Meetups';
-
-
-const client = new ApolloClient({
-  request: (operation) => {
-    const token = localStorage.getItem("id_token");
-
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : "",
-      },
-    });
-  },
-  uri: "/graphql",
-});
+import Home from './components/Home';
+import Create from './components/CreateMeetup';
+import BlogDetails from './components/SingleMeetup';
+import NotFound from './components/404';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'; 
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <>
-          <Navbar />
+    <Router>
+      <div className="">
+        <Navbar/>
+        <div className="content">
           <Switch>
-            <Route exact path="/" component={SearchRestaurants} />
-            <Route exact path="/saved" component={SavedRestaurants} />
-            <Route exact path="/meetups" component={Meetups} />
-            <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
+            <Route exact path="/">
+              <Home/>
+            </Route>
+            <Route path="/create">
+              <Create/>
+            </Route>
+            <Route path="/blogs/:id">
+              <BlogDetails/>
+            </Route>
+            <Route path="*">
+              <NotFound/>
+            </Route>
           </Switch>
-        </>
-      </Router>
-    </ApolloProvider>
+        </div>
+      </div>
+    </Router>
   );
 }
 
