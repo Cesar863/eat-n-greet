@@ -12,7 +12,7 @@ import { render } from '@testing-library/react';
 
 
 const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  uri: '/graphql',
   cache: new InMemoryCache()
 });
 
