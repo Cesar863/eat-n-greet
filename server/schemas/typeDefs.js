@@ -22,14 +22,6 @@ const typeDefs = gql`
     user: User
   }
 
-  input SavedRestaurantInput {
-    restaurantId: String
-    language: String
-    limit: String
-    currency: String
-    locationID: String
-  }
-
   type Query {
     me: User
   }

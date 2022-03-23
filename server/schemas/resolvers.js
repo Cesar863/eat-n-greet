@@ -36,22 +36,22 @@ const resolvers = {
 
       return { token, user };
     },
-    saveRestaurant: async (parent, { input }, context) => {
+    addMeetup: async (parent, { input }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedRestaurants: input } },
+          { $addToSet: { addMeetup: input } },
           { new: true, runValidators: true }
         );
         return updatedUser;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    removeRestaurant: async (parent, { restaurantId }, context) => {
+    deleteMeeup: async (parent, { meetupID }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedRestaurants: { restaurantId: restaurantId } } },
+          { $pull: { deletedMeetup: { meetupId: meetupId } } },
           { new: true }
         );
         return updatedUser;
