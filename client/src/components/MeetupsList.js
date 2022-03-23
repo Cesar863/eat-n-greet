@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import React from 'react'
-// import db from '../../data/db.json'
+import blogs from './data'
 
 
-const MeetupsList = ({blogs, title}) => {
+const MeetupsList = ({title}) => {
 
     return ( 
         <div className="blog-list">
@@ -12,6 +12,7 @@ const MeetupsList = ({blogs, title}) => {
                 <div className="blog-preview" key={blog.id}>
                     <Link to={`/blogs/${blog.id}`}>
                         <h2>{blog.title}</h2>
+                        <p>{blog.body}</p>
                         <p>Written by {blog.author}</p>
                     </Link>
                 </div>

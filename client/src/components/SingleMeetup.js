@@ -1,6 +1,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import useFetch from './useFetch';
 import React from 'react'
+import blogs from './data'
 
 
 const SingleMeetup = () => {

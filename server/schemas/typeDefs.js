@@ -2,8 +2,8 @@ const { gql } = require("apollo-server-express");
 
 
 const typeDefs = gql`
-  type Restaurant {
-    restaurantID: String!
+  type Meetup {
+    MeetupID: String!
     language: String!
     limit: String!
     currency: String!
@@ -14,7 +14,7 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    savedRestaurants: [Restaurant]
+    Meetup: [Meetup]
   }
 
   type Auth {
@@ -28,7 +28,6 @@ const typeDefs = gql`
     limit: String
     currency: String
     locationID: String
-    
   }
 
   type Query {
