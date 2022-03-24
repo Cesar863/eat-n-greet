@@ -9,7 +9,7 @@ const meetupSchema = new Schema({
         type: String,
         required: "You need to enter a meetup!",
         minlength: 1,
-        maxlength: 280,
+        maxlength: 500,
     },
     createdAt: {
         type: Date,

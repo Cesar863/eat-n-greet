@@ -1,9 +1,9 @@
-export const getSavedRestaurantIds = () => {
-    const savedRestaurantIds = localStorage.getItem('saved_restaurants')
-        ? JSON.parse(localStorage.getItem('saved_restaurants'))
+export const getAddedMeetupIds = () => {
+    const addMeetupsIds = localStorage.getItem('add_meetup')
+        ? JSON.parse(localStorage.getItem('add_meetup'))
         : [];
 
-    return savedRestaurantIds;
+    return savedMeetupsIds;
 };
 
 export const saveRestaurantIds = (restaurantIdArr) => {
