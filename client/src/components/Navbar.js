@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
-import React from 'react';
-import 'react-bootstrap';
+import React, { useState } from 'react';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
 
-const Navbar = () => {
+const appNavbar = () => {
+    const [showModal, setShowModal] = useState(false);
+
     return (
         <>
             <Navbar bg='dark' variant='dark' expand='lg'>
@@ -23,7 +24,7 @@ const Navbar = () => {
                             </Nav.Link>
                             {Auth.loggedIn() ? (
                                 <>
-                                    <Nav.Link as={Link} to='/saved'>
+                                    <Nav.Link as={Link} to='/create'>
                                         Create Meetup
                                     </Nav.Link>
                                     <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
@@ -69,4 +70,4 @@ const Navbar = () => {
     );
 }
 
-export default Navbar;
+export default appNavbar;
