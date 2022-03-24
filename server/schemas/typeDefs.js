@@ -29,9 +29,9 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addMeetup(meetupText: String!): User
-    editMeetup(meetupText: String!): User
-    removeMeetup(meetupID: String!): User
+    addMeetup(meetupText: String!): Meetup
+    editMeetup(meetupText: String!): Meetup
+    removeMeetup(meetupID: String!): Meetup
     
   }
 `;
