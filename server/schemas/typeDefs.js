@@ -22,23 +22,8 @@ const typeDefs = gql`
     user: User
   }
 
-  input SavedRestaurantInput {
-    restaurantId: String
-    language: String
-    limit: String
-    currency: String
-    locationID: String
-  }
-
   type Query {
     me: User
-  }
-
-  type Mutation {
-    login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
-    saveRestaurant(input: SavedRestaurantInput): User
-    removeRestaurant(restaurantID: String!): User
   }
 
   type Mutation {

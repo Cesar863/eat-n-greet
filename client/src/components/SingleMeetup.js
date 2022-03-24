@@ -6,11 +6,11 @@ import blogs from './data'
 
 const SingleMeetup = () => {
     const { id } = useParams();
-    const { data: blog, error, isPending } =  useFetch('http://localhost:8000/blogs/' + id);
+    const { data: error, isPending } =  useFetch('/blogs/' + id);
     const history = useHistory();
 
     const handleClick = () => {
-        fetch('http://localhost:8000/blogs/'+ blog.id, {
+        fetch('/blogs/'+ blogs.id, {
             method: 'DELETE'
         }).then(() => {
             history.push('/');
@@ -22,9 +22,9 @@ const SingleMeetup = () => {
             {isPending && <div>Loading...</div>}
             {error && <div>{error}</div>}
             <article >
-                <h2>{blog.title}</h2>
-                <p>Written by {blog.author}</p>
-                <div>{blog.body}</div>
+                <h2>{blogs.title}</h2>
+                <p>Written by {blogs.author}</p>
+                <div>{blogs.body}</div>
                 <button onClick={handleClick}>Delete</button>
             </article>
         </div>
