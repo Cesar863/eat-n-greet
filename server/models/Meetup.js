@@ -20,7 +20,11 @@ const dateFormat = require("../utils/dateFormat");
 //     },
 // });
 const meetupSchema = new Schema({
-    meetupText: {
+    id: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
+    },
+    body: {
         type: String,
         required: "You need to enter a meetup!",
         minlength: 1,
@@ -31,10 +35,14 @@ const meetupSchema = new Schema({
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
     },
-    username: {
+    author: {
         type: String,
         required: true,
     },
+    title: {
+        type: String,
+        required: true
+    }
 }, {
     toJSON: {
         getters: true,

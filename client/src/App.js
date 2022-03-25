@@ -6,8 +6,6 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-import { render } from '@testing-library/react';
-import blogs from './components/Posts';
 import SignupForm from './components/SignupForm';
 import { setContext } from '@apollo/client/link/context';
 
