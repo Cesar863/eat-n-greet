@@ -2,7 +2,6 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 
-const restaurantSchema = require('./Restaurant');
 
 const userSchema = new Schema(
   {
@@ -21,7 +20,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    savedRestaurants: [restaurantSchema],
   },
 
   {
