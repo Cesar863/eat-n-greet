@@ -30,10 +30,9 @@ export const ADD_MEETUPS = gql`
   mutation addMeetups($input: addMeetupInput) {
     addMeetups(input: $input) {
       _id
-      username
+      author
       title
       body
-      image
     }
   }
 `;

@@ -14,13 +14,13 @@ const CreateMeetup = () => {
     const [isPending, setIsPending] = useState(false);
     // const history = useHistory();
 
-    const [addMeetup] = useMutation(ADD_MEETUPS)
+    const [addMeetup, {data, loading, error}] = useMutation(ADD_MEETUPS)
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const meetup = { title, body, author };
+        // const meetup = { title, body, author };
 
         setIsPending(true);
 
@@ -32,6 +32,7 @@ const CreateMeetup = () => {
         //     setIsPending(false);
         //     history.push('/');
         // })
+<<<<<<< HEAD
         try {
             await addMeetup({
                 variables: meetup
@@ -40,6 +41,15 @@ const CreateMeetup = () => {
         catch (e) {
             console.log(e);
         }
+=======
+        await addMeetup({ variables: {
+            title: title,
+            body:body,
+            author: author
+        }})
+        console.log(data);
+        console.log(error);
+>>>>>>> aa9b5c144c6a67165194f49addb1ea9f60a190f7
     }
 
 
