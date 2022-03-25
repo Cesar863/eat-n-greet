@@ -1,19 +1,18 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import React from 'react'
+import React, { useState } from 'react';
+// import { useHistory } from 'react-router-dom';
 import { ADD_MEETUPS } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 
 
 
-const Create = () => {
+const CreateMeetup = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Shubham');
-    const [loadingStatus, setLoadingStatus] = useState(null);
+    // const [loadingStatus, setLoadingStatus] = useState(null);
     // add image
     const [isPending, setIsPending] = useState(false);
-    const history = useHistory();
+    // const history = useHistory();
 
     const [addMeetup] = useMutation(ADD_MEETUPS)
 
@@ -34,22 +33,22 @@ const Create = () => {
         //     history.push('/');
         // })
         try {
-            const { data, loading } = await addMeetup({ 
+            await addMeetup({
                 variables: meetup
             })
         }
-        catch(e){
+        catch (e) {
             console.log(e);
         }
     }
 
 
-    return ( 
+    return (
         <div className="create">
             <h2>Add a New Meetup</h2>
             <form onSubmit={handleSubmit}>
                 <label>Meetup Title</label>
-                <input 
+                <input
                     type="text"
                     required
                     value={title}
@@ -78,4 +77,4 @@ const Create = () => {
 }
 // add form reset once data has been entered
 // if failed/successful routes
-export default Create;
+export default CreateMeetup;
