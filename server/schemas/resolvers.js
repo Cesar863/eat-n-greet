@@ -36,6 +36,8 @@ const resolvers = {
 
       return { token, user };
     },
+    // deleteMeetup: async(parent, user)
+
     // saveRestaurant: async (parent, { input }, context) => {
     //   if (context.user) {
     //     const updatedUser = await User.findOneAndUpdate(
