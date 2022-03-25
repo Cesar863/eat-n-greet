@@ -1,9 +1,24 @@
-const {
-    Schema,
-    model
-} = require("mongoose");
+const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 
+// const meetupSchema = new Schema({
+//     meetupID: {
+//         type: String,
+//         required: true,
+//     },
+//     username: {
+//         type: String,
+//         required: true,
+//     },
+//     title: {
+//         type: String,
+//         required: true,
+//     },
+//     body: {
+//         type: String,
+//         required: true
+//     },
+// });
 const meetupSchema = new Schema({
     meetupText: {
         type: String,

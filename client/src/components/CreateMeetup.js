@@ -1,49 +1,67 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import React from 'react'
+import { ADD_MEETUPS } from '../utils/mutations';
+import { useMutation } from '@apollo/client';
+
 
 
 const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Shubham');
+    const [loadingStatus, setLoadingStatus] = useState(null);
+    // add image
     const [isPending, setIsPending] = useState(false);
     const history = useHistory();
 
-    const handleSubmit = (e) => {
+    const [addMeetup] = useMutation(ADD_MEETUPS)
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const blog = { title, body, author };
+
+        const meetup = { title, body, author };
 
         setIsPending(true);
 
-        fetch('http://localhost:8000/blogs', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(blog)
-        }).then(() => {
-            setIsPending(false);
-            history.push('/');
-        })
+        // fetch('http://localhost:8000/meetups', {
+        //     method: 'POST',
+        //     headers: {"Content-Type": "application/json"},
+        //     body: JSON.stringify(meetup)
+        // }).then(() => {
+        //     setIsPending(false);
+        //     history.push('/');
+        // })
+        try {
+            const { data, loading } = await addMeetup({ 
+                variables: meetup
+            })
+        }
+        catch(e){
+            console.log(e);
+        }
     }
+
 
     return ( 
         <div className="create">
-            <h2>Add a New Blog</h2>
+            <h2>Add a New Meetup</h2>
             <form onSubmit={handleSubmit}>
-                <label>Blog Title</label>
+                <label>Meetup Title</label>
                 <input 
                     type="text"
                     required
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
-                <label>Blog Body:</label>
+                <label>Meetup Body:</label>
                 <textarea
                     required
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                 />
-                <label>Blog author:</label>
+                <label>Meetup Author:</label>
                 <select
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
@@ -52,11 +70,12 @@ const Create = () => {
                     <option value="Satyam">Satyam</option>
                     <option value="Anmol">Anmol</option>
                 </select>
-                {!isPending && <button>Add Blog</button>}
-                {isPending && <button disabled>Adding Blog</button>}
+                {!isPending && <button>Add Meetup</button>}
+                {isPending && <button disabled>Adding Meetup</button>}
             </form>
         </div>
     );
 }
-
+// add form reset once data has been entered
+// if failed/successful routes
 export default Create;

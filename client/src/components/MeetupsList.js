@@ -1,19 +1,22 @@
 import { Link } from 'react-router-dom';
 import React from 'react'
-import blogs from './data'
+import Posts from './Posts'
+import { useMutation } from '@apollo/client';
+import { ADD_MEETUPS } from '../utils/mutations';
 
 
 const MeetupsList = ({title}) => {
+    // const addMeetup = useMutation(ADD_MEETUPS)
 
     return ( 
         <div className="blog-list">
             <h2>{title}</h2>
-            {blogs.map(blog => (
-                <div className="blog-preview" key={blog.id}>
-                    <Link to={`/blogs/${blog.id}`}>
-                        <h2>{blog.title}</h2>
-                        <p>{blog.body}</p>
-                        <p>Written by {blog.author}</p>
+            {Posts.map(post => (
+                <div className="blog-preview" key={post.id}>
+                    <Link to={`/meetups/${post.id}`}>
+                        <h2>{post.title}</h2>
+                        <p>{post.body}</p>
+                        <p>Written by {post.author}</p>
                     </Link>
                 </div>
             ))}
