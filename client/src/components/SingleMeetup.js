@@ -1,16 +1,16 @@
 import { useParams, useHistory } from 'react-router-dom';
 import useFetch from './useFetch';
 import React from 'react'
-import blogs from './data'
+import Posts from './Posts'
 
 
 const SingleMeetup = () => {
     const { id } = useParams();
-    const { data: blog, error, isPending } =  useFetch('http://localhost:8000/blogs/' + id);
+    const { data: error, isPending } =  useFetch('/meetups/' + id);
     const history = useHistory();
 
     const handleClick = () => {
-        fetch('http://localhost:8000/blogs/'+ blog.id, {
+        fetch('/meetups/'+ Posts.id, {
             method: 'DELETE'
         }).then(() => {
             history.push('/');
@@ -22,9 +22,9 @@ const SingleMeetup = () => {
             {isPending && <div>Loading...</div>}
             {error && <div>{error}</div>}
             <article >
-                <h2>{blog.title}</h2>
-                <p>Written by {blog.author}</p>
-                <div>{blog.body}</div>
+                <h2>{Posts.title}</h2>
+                <p>Written by {Posts.author}</p>
+                <div>{Posts.body}</div>
                 <button onClick={handleClick}>Delete</button>
             </article>
         </div>

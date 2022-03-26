@@ -4,12 +4,12 @@ import React from 'react'
 
 
 const Home = () => {
-    const {data: blogs, isPending, error} = useFetch ('http://localhost:3000/blogs');
+    const {data: posts, isPending, error} = useFetch ('http://localhost:3000/posts');
     return ( 
         <div className="home">
             {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
-            <MeetupsList blogs={blogs} title="All Blogs"/>
+            <MeetupsList posts={posts} title="All Posts"/>
         </div>
     );
 }
