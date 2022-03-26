@@ -2,11 +2,11 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type Meetup {
-    MeetupID: String!
-    language: String!
-    limit: String!
-    currency: String!
-    locationID: String!
+    _id: ID
+    body: String!
+    createdAt: String!
+    username: String!
+    title: String!
   }
 
   type User {
@@ -30,7 +30,7 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addMeetup(meetupText: String!): Meetup
+    addMeetup(body: String!, title:String!): Meetup
     editMeetup(meetupText: String!): Meetup
     removeMeetup(meetupID: String!): Meetup
   }
