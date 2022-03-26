@@ -61,7 +61,7 @@ const resolvers = {
           { new: true }
         );
 
-        return meetup;
+        return {meetup};
       }
 
       throw new AuthenticationError("You need to be logged in!");
@@ -83,7 +83,7 @@ const resolvers = {
         console.log(context.user);
 
         await Meetup.findByIdAndRemove(_id);
-        
+
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $pull: { meetups: _id } },

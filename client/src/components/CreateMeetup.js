@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import { ADD_MEETUPS } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
+import { Navigate } from 'react-router-dom';
 
 
 const CreateMeetup = () => {
@@ -38,6 +39,10 @@ const CreateMeetup = () => {
                 username: username
             }
         })
+        // // hook usenavigation from react router dom to route
+        // if (data) {
+        // return <Navigate to="/" replace={true}/>
+        // }
         console.log(data);
         console.log(error);
     }
