@@ -20,6 +20,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    meetups: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Meetup"
+      }
+    ]
   },
 
   {

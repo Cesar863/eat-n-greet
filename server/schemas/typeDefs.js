@@ -31,8 +31,8 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addMeetup(body: String!, title:String!): Meetup
-    editMeetup(meetupText: String!): Meetup
-    removeMeetup(meetupID: String!): Meetup
+    editMeetup(_id: ID!, body: String!, title: String!): Meetup
+    deleteMeetup(_id: ID!): User
   }
 `;
 

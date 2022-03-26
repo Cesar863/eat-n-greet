@@ -8,3 +8,15 @@ export const GET_ME = gql`
     }
   }
 `;
+
+export const MEETUPS = gql`
+query meetups($username: String) {
+  meetups(username: $username) {
+    _id
+    body
+    createdAt
+    username
+    title
+  }
+}
+`;

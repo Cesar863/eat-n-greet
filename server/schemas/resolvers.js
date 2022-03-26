@@ -67,27 +67,26 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    editMeetup: async (parent, args, context) => {
+    editMeetup: async (parent, { _id, body, title } , context) => {
       if (context.user) {
-        const updatedMeetup = await Meetup.findOneAndUpdate({
-          ...args,
-          username: context.user.username,
-        });
-        await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { meetups: meetup._id } },
+        const updatedMeetup = await Meetup.findByIdAndUpdate(
+          { _id: _id },
+          { body, title },
           { new: true }
         );
         return updatedMeetup;
       }
     },
 
-    removeMeetup: async (parent, args, context) => {
+    deleteMeetup: async (parent, { _id }, context) => {
       if (context.user) {
         console.log(context.user);
-        const updatedUser = await User.findOneAndUpdate(
+
+        await Meetup.findByIdAndRemove(_id);
+        
+        const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedMeetups: { meetupId: args.meetupId } } },
+          { $pull: { meetups: _id } },
           { new: true }
         );
         console.log(updatedUser);

@@ -27,36 +27,35 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_MEETUPS = gql`
-  mutation addMeetup($input: addMeetupInput) {
-    addMeetup(input: $input) {
-      _id
-      author
-      title
-      body
-    }
+mutation addMeetup($body: String!, $title: String!) {
+  addMeetup(body: $body, title: $title) {
+    _id
+    body
+    createdAt
+    username
+    title
   }
+}
 `;
 
 export const EDIT_MEETUPS = gql`
-  mutation addMeetups($input: addMeetupInput) {
-    addMeetups(input: $input) {
-      _id
-      username
-      title
-      body
-      image
-    }
+mutation editMeetup($body: String!, $title: String!, $id: ID!) {
+  editMeetup(body: $body, title: $title, _id: $id) {
+    title
+    body
+    _id
+    createdAt
+    username
   }
+}
 `;
 
 export const DELETE_MEETUPS = gql`
-  mutation addMeetups($input: addMeetupInput) {
-    addMeetups(input: $input) {
-      _id
-      username
-      title
-      body
-      image
-    }
+mutation deleteMeetup($id: ID!) {
+  deleteMeetup(_id: $id) {
+    _id
+    username
+    email
   }
+}
 `;
