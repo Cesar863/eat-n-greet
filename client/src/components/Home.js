@@ -1,17 +1,24 @@
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { MEETUPS } from '../utils/queries';
 import MeetupsList from './MeetupsList';
-import useFetch from './useFetch';
-import React from 'react'
-
 
 const Home = () => {
-    const {data: posts, isPending, error} = useFetch ('http://localhost:3000/posts');
-    return ( 
-        <div className="home">
-            {error && <div>{error}</div>}
-            {isPending && <div>Loading...</div>}
-            <MeetupsList posts={posts} title="All Posts"/>
-        </div>
-    );
-}
+    const {loading, data} = useQuery(MEETUPS);
+    const meetups = data?.meetups || [];
+    console.log(meetups);
+
+    return(
+        <main>
+            <div>
+                {loading ? (
+                <div>Loading...</div>
+                ) : (
+                    <MeetupsList meetups={meetups} title="meetups..."/>
+                )}
+            </div>
+        </main>
+    )
+};
 
 export default Home;

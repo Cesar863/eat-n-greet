@@ -1,24 +1,27 @@
-import { Link } from 'react-router-dom';
-import React from 'react'
-import Posts from './Posts'
+import React from 'react';
 
-
-const MeetupsList = ({ title }) => {
-
+const MeetupList = ({ meetups, title }) => {
+    if (!meetups.length) {
+    return <h3>No Thoughts Yet</h3>;
+    }
+  
     return (
-        <div className="blog-list">
-            <h2>{title}</h2>
-            {Posts.map(post => (
-                <div className="blog-preview" key={post.id}>
-                    <Link to={`/meetups/${post.id}`}>
-                        <h2>{post.title}</h2>
-                        <p>{post.body}</p>
-                        <p>Written by {post.author}</p>
-                    </Link>
-                </div>
-            ))}
-        </div>
+      <div>
+        <h3>{title}</h3>
+        {meetups &&
+          meetups.map(meetup => (
+            <div key={meetup._id} className="card mb-3">
+              <p className="card-header">
+                {meetup.username}
+                meets {meetup.createdAt}
+              </p>
+              <div className="card-body">
+                <p>{meetup.body}</p>
+              </div>
+            </div>
+          ))}
+      </div>
     );
-}
-
-export default MeetupsList;
+  };
+  
+  export default MeetupList;

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import { ADD_MEETUPS } from '../utils/mutations';
-import { useMutation } from '@apollo/client';
-
+import { useMutation, useQuery } from '@apollo/client';
 
 
 const CreateMeetup = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [author, setAuthor] = useState('Shubham');
+    const [username, setUsername] = useState('');
     // const [loadingStatus, setLoadingStatus] = useState(null);
     // add image
     const [isPending, setIsPending] = useState(false);
@@ -36,7 +35,7 @@ const CreateMeetup = () => {
             variables: {
                 title: title,
                 body: body,
-                author: author
+                username: username
             }
         })
         console.log(data);
@@ -61,15 +60,12 @@ const CreateMeetup = () => {
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                 />
-                <label>Meetup Author:</label>
-                <select
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                >
-                    <option value="Shubham">Shubham</option>
-                    <option value="Satyam">Satyam</option>
-                    <option value="Anmol">Anmol</option>
-                </select>
+                {/* <label>Meetup Author:</label> */}
+                {/* <textarea 
+                    required
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                /> */}
                 {!isPending && <button>Add Meetup</button>}
                 {isPending && <button disabled>Adding Meetup</button>}
             </form>

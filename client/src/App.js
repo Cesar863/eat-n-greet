@@ -36,13 +36,9 @@ function App() {
           <AppNavbar />
           <div className="content">
             <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/create">
-                <CreateMeetup />
-              </Route>
-              <Route path="/blogs/:id">
+              <Route exact path="/" component={Home}/>
+              <Route exact path="/create" component={CreateMeetup}/>
+              <Route path="/singleMeetup/:id">
                 <SingleMeetup />
               </Route>
               <Route path="/signup">
