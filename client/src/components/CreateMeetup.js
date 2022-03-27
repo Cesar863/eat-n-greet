@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import { ADD_MEETUPS } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
-import { Navigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 const CreateMeetup = () => {
@@ -12,26 +12,22 @@ const CreateMeetup = () => {
     // const [loadingStatus, setLoadingStatus] = useState(null);
     // add image
     const [isPending, setIsPending] = useState(false);
-    // const history = useHistory();
+    const history = useHistory();
 
-    const [addMeetup, { data, loading, error }] = useMutation(ADD_MEETUPS)
+    const [addMeetup, { error }] = useMutation(ADD_MEETUPS, {
+
+    refetchQueries: [
+        "meetups"
+      ],
+    })
+
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // const meetup = { title, body, author };
-
         setIsPending(true);
 
-        // fetch('http://localhost:8000/meetups', {
-        //     method: 'POST',
-        //     headers: {"Content-Type": "application/json"},
-        //     body: JSON.stringify(meetup)
-        // }).then(() => {
-        //     setIsPending(false);
-        //     history.push('/');
-        // })
         await addMeetup({
             variables: {
                 title: title,
@@ -39,11 +35,8 @@ const CreateMeetup = () => {
                 username: username
             }
         })
-        // // hook usenavigation from react router dom to route
-        // if (data) {
-        // return <Navigate to="/" replace={true}/>
-        // }
-        console.log(data);
+
+            history.push('/');
         console.log(error);
     }
 

@@ -61,7 +61,7 @@ const resolvers = {
           { new: true }
         );
 
-        return {meetup};
+        return meetup;
       }
 
       throw new AuthenticationError("You need to be logged in!");
@@ -95,31 +95,6 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in!");
     },
-
-    // deleteMeetup: async(parent, user)
-
-    // saveRestaurant: async (parent, { input }, context) => {
-    //   if (context.user) {
-    //     const updatedUser = await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $addToSet: { savedRestaurants: input } },
-    //       { new: true, runValidators: true }
-    //     );
-    //     return updatedUser;
-    //   }
-    //   throw new AuthenticationError("You need to be logged in!");
-    // },
-    //   removeRestaurant: async (parent, { restaurantId }, context) => {
-    //     if (context.user) {
-    //       const updatedUser = await User.findOneAndUpdate(
-    //         { _id: context.user._id },
-    //         { $pull: { savedRestaurants: { restaurantId: restaurantId } } },
-    //         { new: true }
-    //       );
-    //       return updatedUser;
-    //     }
-    //     throw new AuthenticationError("You need to be logged in!");
-    //   },
   },
 };
 
