@@ -1,17 +1,29 @@
-import { useHistory } from 'react-router-dom';
-import React from 'react'
+import React, {useState} from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+
+// import ReactionList from '../components/ReactionList';
+// import ReactionForm from '../components/ReactionForm';
+
+import Auth from '../utils/auth';
+import { useQuery, useMutation, } from '@apollo/client';
+import { MEETUPS, GET_ME } from '../utils/queries';
 import { DELETE_MEETUPS } from '../utils/mutations';
-import { useMutation, useQuery } from '@apollo/client';
-import Posts from './Posts'
 
 
-const SingleMeetup = () => {
 
-    const { loading, data } = useQuery(GET_ME);
-    const userData = data?.me || [];
+const SingleMeetup = (props) => {
+    const {id: meetupID } = useParams();
+    const { loading, data } = useQuery(GET_ME, {
+        variables: {id: meetupID },
+    });
+    const [isPending, setIsPending] = useState(false);
+
+
+    const meetup = data?.meetup || {};
+    // const userData = data?.me || [];
     const history = useHistory();
 
-    const [deleteMeetup, { error }] = useMutation(DELETE_BOOK);
+    const [deleteMeetup, { error }] = useMutation(DELETE_MEETUPS);
 
     const handleDeleteMeetup = async (meetupId) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -26,7 +38,7 @@ const SingleMeetup = () => {
             if (!response) {
                 throw new Error("something went wrong!");
             }
-            removeMeetupId(meetupId);
+            // removeMeetupId(meetupId);
         } catch (err) {
             console.error(error);
         }
@@ -40,9 +52,9 @@ const SingleMeetup = () => {
             {isPending && <div>Loading...</div>}
             {error && <div>{error}</div>}
             <article >
-                <h2>{Posts.title}</h2>
-                <p>Written by {Posts.author}</p>
-                <div>{Posts.body}</div>
+                <h2>{meetup.title}</h2>
+                <p>Written by {meetup.author}</p>
+                <div>{meetup.body}</div>
                 {/* <button onClick={handleClick}>Edit</button> */}
                 <button onClick={() => handleDeleteMeetup(meetup.meetupID)}>Delete</button>
             </article>

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const MeetupList = ({ meetups }) => {
     if (!meetups.length) {
@@ -14,7 +15,9 @@ const MeetupList = ({ meetups }) => {
                 meets {meetup.createdAt}
             </p>
             <div className="card-body">
+                <Link to={`/meetup/${meetup._id}`}>
                 <p>{meetup.title}</p>
+                </Link>
             </div>
             </div>
         ))}
