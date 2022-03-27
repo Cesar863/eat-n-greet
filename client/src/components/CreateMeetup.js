@@ -16,9 +16,9 @@ const CreateMeetup = () => {
 
     const [addMeetup, { error }] = useMutation(ADD_MEETUPS, {
 
-    refetchQueries: [
-        "meetups"
-      ],
+        refetchQueries: [
+            "meetups"
+        ],
     })
 
 
@@ -36,7 +36,7 @@ const CreateMeetup = () => {
             }
         })
 
-            history.push('/');
+        history.push('/');
         console.log(error);
     }
 
