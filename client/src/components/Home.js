@@ -4,17 +4,17 @@ import { MEETUPS } from '../utils/queries';
 import MeetupsList from './MeetupsList';
 
 const Home = () => {
-    const {loading, data} = useQuery(MEETUPS);
+    const { loading, data } = useQuery(MEETUPS);
     const meetups = data?.meetups || [];
     console.log(meetups);
 
-    return(
+    return (
         <main>
             <div>
                 {loading ? (
-                <div>Loading...</div>
+                    <div>Loading...</div>
                 ) : (
-                    <MeetupsList meetups={meetups} title="meetups..."/>
+                    <MeetupsList meetups={meetups} title="meetups..." />
                 )}
             </div>
         </main>
