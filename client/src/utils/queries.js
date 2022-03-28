@@ -20,3 +20,15 @@ query meetups($username: String) {
   }
 }
 `;
+
+export const SINGLE_MEETUP = gql`
+query meetups($id: ID!) {
+  meetups(_id: $id) {
+    _id
+    body
+    createdAt
+    username
+    title
+  }
+}
+`;

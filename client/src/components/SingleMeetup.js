@@ -6,16 +6,19 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import Auth from '../utils/auth';
 import { useQuery, useMutation, } from '@apollo/client';
-import { MEETUPS, GET_ME } from '../utils/queries';
+import { SINGLE_MEETUP } from '../utils/queries';
 import { DELETE_MEETUPS } from '../utils/mutations';
 
 
 
 const SingleMeetup = (props) => {
-    const {id: meetupID } = useParams();
-    const { loading, data } = useQuery(GET_ME, {
-        variables: {id: meetupID },
+    const {_id: meetupID } = useParams();
+    const { loading, data } = useQuery(SINGLE_MEETUP, {
+        variables: {_id: meetupID },
     });
+
+    // const {loading, data} = useQuery(MEETUPS);
+    // const meetups = data?.meetups || [];
     const [isPending, setIsPending] = useState(false);
 
 
@@ -53,7 +56,7 @@ const SingleMeetup = (props) => {
             {error && <div>{error}</div>}
             <article >
                 <h2>{meetup.title}</h2>
-                <p>Written by {meetup.author}</p>
+                <p>Written by {meetup.username}</p>
                 <div>{meetup.body}</div>
                 {/* <button onClick={handleClick}>Edit</button> */}
                 <button onClick={() => handleDeleteMeetup(meetup.meetupID)}>Delete</button>
