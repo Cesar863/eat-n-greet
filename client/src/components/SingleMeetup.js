@@ -12,58 +12,60 @@ import { DELETE_MEETUPS } from '../utils/mutations';
 
 
 const SingleMeetup = (props) => {
-    const {_id: meetupID } = useParams();
+    const {id: meetupID } = useParams();
+
     const { loading, data } = useQuery(SINGLE_MEETUP, {
-        variables: {_id: meetupID },
+        variables: {id: meetupID },
     });
 
     // const {loading, data} = useQuery(MEETUPS);
     // const meetups = data?.meetups || [];
-    const [isPending, setIsPending] = useState(false);
+    // const [isPending, setIsPending] = useState(false);
 
 
     const meetup = data?.meetup || {};
+    console.log(data);
     // const userData = data?.me || [];
-    const history = useHistory();
+    // const history = useHistory();
 
-    const [deleteMeetup, { error }] = useMutation(DELETE_MEETUPS);
+    // const [deleteMeetup, { error }] = useMutation(DELETE_MEETUPS);
 
-    const handleDeleteMeetup = async (meetupId) => {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
-        if (!token) {
-            return false;
-        }
-        try {
-            const response = await deleteMeetup({
-                variables: { meetupId: meetupId },
-            });
+    // const handleDeleteMeetup = async (meetupId) => {
+    //     const token = Auth.loggedIn() ? Auth.getToken() : null;
+    //     if (!token) {
+    //         return false;
+    //     }
+    //     try {
+    //         const response = await deleteMeetup({
+    //             variables: { meetupId: meetupId },
+    //         });
 
-            if (!response) {
-                throw new Error("something went wrong!");
-            }
-            // removeMeetupId(meetupId);
-        } catch (err) {
-            console.error(error);
-        }
-    };
+    //         if (!response) {
+    //             throw new Error("something went wrong!");
+    //         }
+    //         // removeMeetupId(meetupId);
+    //     } catch (err) {
+    //         console.error(error);
+    //     }
+    // };
 
-    history.push('/');
+    // history.push('/');
 
 
     return (
         <div className="blog-details">
-            {isPending && <div>Loading...</div>}
-            {error && <div>{error}</div>}
+            {/* {isPending && <div>Loading...</div>}
+            {error && <div>{error}</div>} */}
             <article >
                 <h2>{meetup.title}</h2>
                 <p>Written by {meetup.username}</p>
                 <div>{meetup.body}</div>
                 {/* <button onClick={handleClick}>Edit</button> */}
-                <button onClick={() => handleDeleteMeetup(meetup.meetupID)}>Delete</button>
+                {/* <button onClick={() => handleDeleteMeetup(meetup.meetupID)}>Delete</button> */}
             </article>
         </div>
     );
-}
+};
 export default SingleMeetup;
 
 
