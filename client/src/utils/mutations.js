@@ -39,11 +39,11 @@ mutation addMeetup($body: String!, $title: String!) {
 `;
 
 export const EDIT_MEETUPS = gql`
-mutation editMeetup($body: String!, $title: String!, $id: ID!) {
-  editMeetup(body: $body, title: $title, _id: $id) {
+mutation editMeetup($id: ID!, $body: String!, $title: String!) {
+  editMeetup(_id: $id, body: $body, title: $title) {
+    _id
     title
     body
-    _id
     createdAt
     username
   }

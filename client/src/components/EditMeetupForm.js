@@ -1,28 +1,36 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
 import { EDIT_MEETUPS } from "../utils/mutations";
+import { useParams } from "react-router-dom";
+import { SINGLE_MEETUP } from "../utils/queries";
+import { Form, Button, Alert } from "react-bootstrap";
 
-const EditMeetupForm = () =>{
-    const {id: meetupID, body: meetupBody, title:meetupTitle } = useParams();
-    console.log({meetupID});
-    const { loading, data } = useQuery(SINGLE_MEETUP, {
-        variables: {id: meetupID,  body: meetupBody, title:meetupTitle},
-    });
+
+const EditMeetupForm = ({meetup}) =>{
+    // const {id: meetupID, body: meetupBody, title:meetupTitle } = useParams();
+    // console.log({meetupID});
+
+    // const { loading, data } = useQuery(SINGLE_MEETUP, {
+    //     variables: {id: meetupID,  body: meetupBody, title:meetupTitle},
+    // });
+    console.log(meetup);
     const [editFormData, setEditFormData] = useState({
-        title: meetupBody, 
-        body: meetupBody,
+        id: meetup._id,
+        title: meetup.title, 
+        body: meetup.body,
     });
+    console.log(editFormData);
     const [validated] = useState(false);
     // set state for alert
     const [showAlert, setShowAlert] = useState(false);
 
     const [editMeetup, { error }] = useMutation(EDIT_MEETUPS);
 
-    // const handleMeetupChange = (event) => {
-    //     const { title, value } = event.target;
-    //     setUserFormData({ ...userFormData, [name]: value });
-    // };
+    const handleMeetupChange = (event) => {
+        const { name, value } = event.target;
+        setEditFormData({ ...editFormData, [name]: value });
+    };
 
     const handleEditSubmit = async (event) => {
         event.preventDefault();
@@ -35,25 +43,29 @@ const EditMeetupForm = () =>{
         }
 
         try {
-            const { data } = await editMeetup({
-                variables: { ...editFormData },
+            await editMeetup({
+                variables: {
+                    _id: editFormData.id,
+                    body: editFormData.body,
+                    title: editFormData.title
+                },
             });
-            Auth.login(data.editMeetup.token);
+            // Auth.login(data.editMeetup.token);
         } catch (err) {
             console.error(error);
             setShowAlert(true);
         }
 
-        setEditFormData({
-            title: "",
-            body: "",
-        });
+        // setEditFormData({
+        //     title: "",
+        //     body: "",
+        // });
     };
 
     return (
         <>
             {/* This is needed for the validation functionality above */}
-            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+            <Form noValidate validated={validated} onSubmit={handleEditSubmit}>
                 {/* show alert if server response is bad */}
                 <Alert
                     dismissible
@@ -69,9 +81,9 @@ const EditMeetupForm = () =>{
                     <Form.Control
                         type="text"
                         placeholder="Your username"
-                        name="username"
-                        onChange={handleInputChange}
-                        value={userFormData.username}
+                        name="title"
+                        onChange={handleMeetupChange}
+                        defaultValue={meetup.title}
                         required
                     />
                     <Form.Control.Feedback type="invalid">
@@ -84,37 +96,18 @@ const EditMeetupForm = () =>{
                     <Form.Control
                         type="email"
                         placeholder="Your email address"
-                        name="email"
-                        onChange={handleInputChange}
-                        value={userFormData.email}
+                        name="body"
+                        onChange={handleMeetupChange}
+                        defaultValue={meetup.body}
                         required
                     />
                     <Form.Control.Feedback type="invalid">
                         Email is required!
                     </Form.Control.Feedback>
                 </Form.Group>
-
-                <Form.Group>
-                    <Form.Label htmlFor="password">Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Your password"
-                        name="password"
-                        onChange={handleInputChange}
-                        value={userFormData.password}
-                        required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Password is required!
-                    </Form.Control.Feedback>
-                </Form.Group>
                 <Button
                     disabled={
-                        !(
-                            userFormData.username &&
-                            userFormData.email &&
-                            userFormData.password
-                        )
+                        !editFormData
                     }
                     type="submit"
                     variant="success"
@@ -125,3 +118,5 @@ const EditMeetupForm = () =>{
         </>
     );
 }
+
+export default EditMeetupForm;

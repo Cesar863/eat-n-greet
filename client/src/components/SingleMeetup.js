@@ -8,6 +8,8 @@ import Auth from '../utils/auth';
 import { useQuery, useMutation, } from '@apollo/client';
 import { SINGLE_MEETUP } from '../utils/queries';
 import { DELETE_MEETUPS } from '../utils/mutations';
+import EditMeetupForm from './EditMeetupForm';
+import { Modal } from 'react-bootstrap';
 
 
 
@@ -21,6 +23,8 @@ const SingleMeetup = (props) => {
     // const {loading, data} = useQuery(MEETUPS);
     // const meetups = data?.meetups || [];
     const [isPending, setIsPending] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
 
 
     const meetup = data?.meetup || {};
@@ -63,9 +67,12 @@ const SingleMeetup = (props) => {
                 <h2>{meetup.title}</h2>
                 <p>Written by {meetup.username}</p>
                 <div>{meetup.body}</div>
-                {/* <button onClick={() => handleEditMeetup(meetup.meetupID)}>Edit</button> */}
+                <button onClick={() => setShowModal(true)}>Edit</button>
                 <button onClick={() => handleDeleteMeetup(meetup.meetupID)}>Delete</button>
             </article>
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <EditMeetupForm meetup={meetup}/>
+            </Modal>
         </div>
     );
 };
