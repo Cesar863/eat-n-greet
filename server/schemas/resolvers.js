@@ -67,11 +67,11 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    editMeetup: async (parent, { _id, body, title } , context) => {
+    editMeetup: async (parent, args, context) => {
       if (context.user) {
         const updatedMeetup = await Meetup.findByIdAndUpdate(
-          { _id: _id },
-          { body, title },
+          { _id: args._id },
+          args,
           { new: true }
         );
         return updatedMeetup;

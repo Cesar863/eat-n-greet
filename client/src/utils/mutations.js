@@ -43,8 +43,6 @@ mutation editMeetup($id: ID!, $body: String!, $title: String!) {
     _id
     title
     body
-    createdAt
-    username
   }
 }
 `;

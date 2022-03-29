@@ -7,7 +7,7 @@ import { SINGLE_MEETUP } from "../utils/queries";
 import { Form, Button, Alert } from "react-bootstrap";
 
 
-const EditMeetupForm = ({meetup}) =>{
+const EditMeetupForm = ({ meetup }) => {
     // const {id: meetupID, body: meetupBody, title:meetupTitle } = useParams();
     // console.log({meetupID});
 
@@ -16,8 +16,8 @@ const EditMeetupForm = ({meetup}) =>{
     // });
     console.log(meetup);
     const [editFormData, setEditFormData] = useState({
-        id: meetup._id,
-        title: meetup.title, 
+        _id: meetup._id,
+        title: meetup.title,
         body: meetup.body,
     });
     console.log(editFormData);
@@ -34,6 +34,7 @@ const EditMeetupForm = ({meetup}) =>{
 
     const handleEditSubmit = async (event) => {
         event.preventDefault();
+        setEditFormData({ ...editFormData, _id: meetup._id })
 
         // check if form has everything (as per react-bootstrap docs)
         const form = event.currentTarget;
@@ -45,21 +46,15 @@ const EditMeetupForm = ({meetup}) =>{
         try {
             await editMeetup({
                 variables: {
-                    _id: editFormData.id,
+                    _id: editFormData._id,
                     body: editFormData.body,
                     title: editFormData.title
                 },
             });
-            // Auth.login(data.editMeetup.token);
         } catch (err) {
-            console.error(error);
+            console.error(error.message);
             setShowAlert(true);
         }
-
-        // setEditFormData({
-        //     title: "",
-        //     body: "",
-        // });
     };
 
     return (
