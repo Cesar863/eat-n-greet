@@ -22,8 +22,8 @@ query meetups($username: String) {
 `;
 
 export const SINGLE_MEETUP = gql`
-query meetups($id: ID!) {
-  meetups(_id: $id) {
+query Meetup($id: ID!) {
+  meetup(_id: $id) {
     _id
     body
     createdAt
