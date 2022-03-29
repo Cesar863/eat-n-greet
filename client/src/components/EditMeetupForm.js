@@ -16,7 +16,7 @@ const EditMeetupForm = ({ meetup }) => {
     // });
     console.log(meetup);
     const [editFormData, setEditFormData] = useState({
-        // _id: meetup._id,
+        // id: meetup._id,
         title: meetup.title,
         body: meetup.body,
     });
@@ -34,7 +34,6 @@ const EditMeetupForm = ({ meetup }) => {
 
     const handleEditSubmit = async (event) => {
         event.preventDefault();
-        setEditFormData({ ...editFormData, _id: meetup._id })
 
         // check if form has everything (as per react-bootstrap docs)
         const form = event.currentTarget;
@@ -46,7 +45,7 @@ const EditMeetupForm = ({ meetup }) => {
         try {
             await editMeetup({
                 variables: {
-                    _id: meetup._id,
+                    id: meetup._id,
                     body: editFormData.body,
                     title: editFormData.title
                 },
@@ -68,7 +67,7 @@ const EditMeetupForm = ({ meetup }) => {
                     show={showAlert}
                     variant="danger"
                 >
-                    Something went wrong with your signup!
+                    Something went wrong with your meetup!
                 </Alert>
 
                 <Form.Group>
