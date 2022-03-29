@@ -8,34 +8,44 @@ import Auth from '../utils/auth';
 import { useQuery, useMutation, } from '@apollo/client';
 import { SINGLE_MEETUP } from '../utils/queries';
 import { DELETE_MEETUPS } from '../utils/mutations';
+import EditMeetupForm from './EditMeetupForm';
+import { Modal } from 'react-bootstrap';
 
 
 
 const SingleMeetup = (props) => {
-    const {_id: meetupID } = useParams();
+    const {id: meetupID } = useParams();
+    console.log({meetupID});
     const { loading, data } = useQuery(SINGLE_MEETUP, {
-        variables: {_id: meetupID },
+        variables: {id: meetupID },
     });
 
     // const {loading, data} = useQuery(MEETUPS);
     // const meetups = data?.meetups || [];
     const [isPending, setIsPending] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
 
 
     const meetup = data?.meetup || {};
-    // const userData = data?.me || [];
+    console.log({meetup});
+    const userData = data?.me || [];
     const history = useHistory();
 
-    const [deleteMeetup, { error }] = useMutation(DELETE_MEETUPS);
+    const [deleteMeetup, { error }] = useMutation(DELETE_MEETUPS, {
+        refetchQueries: [
+            'meetups'
+        ],
+    })
 
-    const handleDeleteMeetup = async (meetupId) => {
+    const handleDeleteMeetup = async () => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
         if (!token) {
             return false;
         }
         try {
             const response = await deleteMeetup({
-                variables: { meetupId: meetupId },
+                variables: { id: meetupID },
             });
 
             if (!response) {
@@ -45,9 +55,8 @@ const SingleMeetup = (props) => {
         } catch (err) {
             console.error(error);
         }
-    };
-
     history.push('/');
+    };
 
 
     return (
@@ -58,12 +67,15 @@ const SingleMeetup = (props) => {
                 <h2>{meetup.title}</h2>
                 <p>Written by {meetup.username}</p>
                 <div>{meetup.body}</div>
-                {/* <button onClick={handleClick}>Edit</button> */}
+                <button onClick={() => setShowModal(true)}>Edit</button>
                 <button onClick={() => handleDeleteMeetup(meetup.meetupID)}>Delete</button>
             </article>
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <EditMeetupForm meetup={meetup}/>
+            </Modal>
         </div>
     );
-}
+};
 export default SingleMeetup;
 
 
