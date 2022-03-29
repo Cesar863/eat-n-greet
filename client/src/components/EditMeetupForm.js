@@ -16,7 +16,7 @@ const EditMeetupForm = ({ meetup }) => {
     // });
     console.log(meetup);
     const [editFormData, setEditFormData] = useState({
-        _id: meetup._id,
+        // _id: meetup._id,
         title: meetup.title,
         body: meetup.body,
     });
@@ -46,13 +46,13 @@ const EditMeetupForm = ({ meetup }) => {
         try {
             await editMeetup({
                 variables: {
-                    _id: editFormData._id,
+                    _id: meetup._id,
                     body: editFormData.body,
                     title: editFormData.title
                 },
             });
         } catch (err) {
-            console.error(error.message);
+            console.error(error);
             setShowAlert(true);
         }
     };
@@ -72,7 +72,7 @@ const EditMeetupForm = ({ meetup }) => {
                 </Alert>
 
                 <Form.Group>
-                    <Form.Label htmlFor="username">Username</Form.Label>
+                    <Form.Label htmlFor="username">Title</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Your username"
@@ -82,12 +82,12 @@ const EditMeetupForm = ({ meetup }) => {
                         required
                     />
                     <Form.Control.Feedback type="invalid">
-                        Username is required!
+                        Title is required!
                     </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label htmlFor="email">Email</Form.Label>
+                    <Form.Label htmlFor="email">Body</Form.Label>
                     <Form.Control
                         type="email"
                         placeholder="Your email address"
@@ -97,7 +97,7 @@ const EditMeetupForm = ({ meetup }) => {
                         required
                     />
                     <Form.Control.Feedback type="invalid">
-                        Email is required!
+                        Body is required!
                     </Form.Control.Feedback>
                 </Form.Group>
                 <Button
