@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-// import ReactionList from '../components/ReactionList';
-// import ReactionForm from '../components/ReactionForm';
 
 import Auth from '../utils/auth';
 import { useQuery, useMutation, } from '@apollo/client';
@@ -20,8 +18,6 @@ const SingleMeetup = () => {
         variables: {id: meetupID },
     });
 
-    // const {loading, data} = useQuery(MEETUPS);
-    // const meetups = data?.meetups || [];
     const [isPending, setIsPending] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
@@ -79,22 +75,4 @@ const SingleMeetup = () => {
 export default SingleMeetup;
 
 
-
-// <Modal show={showModal} onHide={() => setShowModal(false)}>
-// <EditMeetupForm meetup={meetup} closeModal={setOpenModal}/>
-// </Modal>}
-
-    // const [ID] = useState('');
-    // const [isPending, setIsPending] = useState(false);
-
-
-    // 
-
-    // const handleClick = () => {
-    //     fetch('/meetups/' + Posts.id, {
-    //         method: 'DELETE'
-    //     }).then(() => {
-    //         history.push('/');
-    //     })
-    // }
 

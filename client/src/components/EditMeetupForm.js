@@ -9,12 +9,6 @@ import { Modal } from 'react-bootstrap';
 import SingleMeetup from "./SingleMeetup";
 
 const EditMeetupForm = ({ meetup, closeModal }) => {
-    // const {id: meetupID, body: meetupBody, title:meetupTitle } = useParams();
-    // console.log({meetupID});
-
-    // const { loading, data } = useQuery(SINGLE_MEETUP, {
-    //     variables: {id: meetupID,  body: meetupBody, title:meetupTitle},
-    // });
     console.log(meetup);
     const [editFormData, setEditFormData] = useState({
         // id: meetup._id,
@@ -104,20 +98,8 @@ const EditMeetupForm = ({ meetup, closeModal }) => {
                         Body is required!
                     </Form.Control.Feedback>
                 </Form.Group>
-                {/* <Button onClick={() => setShowModal(false)}
-                    disabled={
-                        !editFormData
-                    }
-                    type="submit"
-                    variant="success"
-                >
-                    Submit
-                </Button> */}
                 <button onClick={() => closeModal(false)}>Submit</button>
             </Form>
-            {/* <Modal show={showModal} onHide={() => setShowModal(true)}>
-                <SingleMeetup />
-            </Modal> */}
         </>
     );
 }
