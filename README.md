@@ -20,8 +20,8 @@ Run NPM I on Client Server and Root
 
 Contributions made by Cesar Martinez, Chris Fabra, Hilliard Stamper, Kelsey Schenk, and Molly Rendon.
 
-
-
+## Link to App
+https://eat-n-greet-meetup.herokuapp.com/
 
 ## Questions
 For any questions contact us on GitHub!
