@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const MeetupList = ({ meetups }) => {
     if (!meetups.length) {
-        return <h3>No Thoughts Yet</h3>;
+        return <h3>No Meets Yet</h3>;
     }
     return (
         <div>
@@ -12,7 +12,8 @@ const MeetupList = ({ meetups }) => {
                     <div key={meetup._id} className="card mb-3">
                         <p className="card-header">
                             {meetup.username}
-                            meets {meetup.createdAt}
+                            <br/>
+                            {meetup.createdAt}
                         </p>
                         <div className="card-body">
                             <Link to={`/meetup/${meetup._id}`}>
