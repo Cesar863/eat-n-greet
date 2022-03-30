@@ -5,9 +5,10 @@ import { EDIT_MEETUPS } from "../utils/mutations";
 import { useParams } from "react-router-dom";
 import { SINGLE_MEETUP } from "../utils/queries";
 import { Form, Button, Alert } from "react-bootstrap";
+import { Modal } from 'react-bootstrap';
+import SingleMeetup from "./SingleMeetup";
 
-
-const EditMeetupForm = ({ meetup }) => {
+const EditMeetupForm = ({ meetup, closeModal }) => {
     // const {id: meetupID, body: meetupBody, title:meetupTitle } = useParams();
     // console.log({meetupID});
 
@@ -32,8 +33,12 @@ const EditMeetupForm = ({ meetup }) => {
         setEditFormData({ ...editFormData, [name]: value });
     };
 
+
+
     const handleEditSubmit = async (event) => {
         event.preventDefault();
+
+
 
         // check if form has everything (as per react-bootstrap docs)
         const form = event.currentTarget;
@@ -74,7 +79,7 @@ const EditMeetupForm = ({ meetup }) => {
                     <Form.Label htmlFor="username">Title</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Your username"
+                        placeholder=""
                         name="title"
                         onChange={handleMeetupChange}
                         defaultValue={meetup.title}
@@ -89,7 +94,7 @@ const EditMeetupForm = ({ meetup }) => {
                     <Form.Label htmlFor="email">Body</Form.Label>
                     <Form.Control
                         type="email"
-                        placeholder="Your email address"
+                        placeholder=""
                         name="body"
                         onChange={handleMeetupChange}
                         defaultValue={meetup.body}
@@ -99,7 +104,7 @@ const EditMeetupForm = ({ meetup }) => {
                         Body is required!
                     </Form.Control.Feedback>
                 </Form.Group>
-                <Button
+                {/* <Button onClick={() => setShowModal(false)}
                     disabled={
                         !editFormData
                     }
@@ -107,8 +112,12 @@ const EditMeetupForm = ({ meetup }) => {
                     variant="success"
                 >
                     Submit
-                </Button>
+                </Button> */}
+                <button onClick={() => closeModal(false)}>Submit</button>
             </Form>
+            {/* <Modal show={showModal} onHide={() => setShowModal(true)}>
+                <SingleMeetup />
+            </Modal> */}
         </>
     );
 }

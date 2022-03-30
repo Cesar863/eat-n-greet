@@ -13,7 +13,7 @@ import { Modal } from 'react-bootstrap';
 
 
 
-const SingleMeetup = (props) => {
+const SingleMeetup = () => {
     const {id: meetupID } = useParams();
     console.log({meetupID});
     const { loading, data } = useQuery(SINGLE_MEETUP, {
@@ -70,8 +70,8 @@ const SingleMeetup = (props) => {
                 <button onClick={() => setShowModal(true)}>Edit</button>
                 <button onClick={() => handleDeleteMeetup(meetup.meetupID)}>Delete</button>
             </article>
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <EditMeetupForm meetup={meetup}/>
+            <Modal show={showModal}>
+                <EditMeetupForm meetup={meetup} closeModal={setShowModal}/>
             </Modal>
         </div>
     );
@@ -80,7 +80,9 @@ export default SingleMeetup;
 
 
 
-
+// <Modal show={showModal} onHide={() => setShowModal(false)}>
+// <EditMeetupForm meetup={meetup} closeModal={setOpenModal}/>
+// </Modal>}
 
     // const [ID] = useState('');
     // const [isPending, setIsPending] = useState(false);
