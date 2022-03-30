@@ -1,35 +1,27 @@
-# Book Search Engine Starter Code
+# Eat-N-Greet
 
 
 ## Description
-  An application designed to allow users to make posts about their food and restaurant interests.
-
+For centuries, sharing food has been a way for people of all walks of life to bond. Eat N Greet allows foodies to meet at local restaurants and share their favorite cuisines with new friends.
 
 ## Table of Contents
 
 - [Description](#description)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Contributions](#contributions)
 - [License](#license)
-- [Tests](#tests)
 - [Questions](#questions)
 
 ## Installation
-
-
-
-## Usage
-
+Run NPM I on Client Server and Root
 
 
 ## Contributions
 
 Contributions made by Cesar Martinez, Chris Fabra, Hilliard Stamper, Kelsey Schenk, and Molly Rendon.
 
-## Tests
 
 
 
 ## Questions
-For any questions contact .
+For any questions contact us on GitHub!

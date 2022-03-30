@@ -14,7 +14,6 @@ const CreateMeetup = () => {
     const [body, setBody] = useState('');
     const [username, setUsername] = useState('');
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    // const [loadingStatus, setLoadingStatus] = useState(null);
     // add image
     const [isPending, setIsPending] = useState(false);
     const history = useHistory();
@@ -65,12 +64,6 @@ const CreateMeetup = () => {
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                 />
-                {/* <label>Meetup Author:</label> */}
-                {/* <textarea 
-                    required
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                /> */}
                 {!isPending && <button>Add Meetup</button>}
                 {isPending && <button disabled>Adding Meetup</button>}
             </form>
