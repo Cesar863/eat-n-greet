@@ -22,6 +22,7 @@
     "axios": "^0.26.1",
     "if-env": "^1.0.4",
     "json-server": "^0.17.0",
+    "path": "^0.12.7",
     "restaurants": "^0.0.7"
   },
   "devDependencies": {
