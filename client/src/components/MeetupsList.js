@@ -12,7 +12,7 @@ const MeetupList = ({ meetups }) => {
                     <div key={meetup._id} className="card mb-3">
                         <p className="card-header">
                             {meetup.username}
-                            meets {meetup.createdAt}
+                            {meetup.createdAt}
                         </p>
                         <div className="card-body">
                             <Link to={`/meetup/${meetup._id}`}>
